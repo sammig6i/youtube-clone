@@ -36,19 +36,14 @@ app.post("/process-video", async (req, res) => {
   // Download raw video from Cloud Storage
   await downloadRawVideo(inputFileName);
 
-  // Delete videos after upload or when error occurs
-  const deleteVideos = async () => {
-    await Promise.all([
-      deleteRawVideo(inputFileName),
-      deleteProcessedVideo(outputFileName),
-    ]);
-  };
-
   // Convert video to 360p
   try {
     await convertVideo(inputFileName, outputFileName);
   } catch (err) {
-    deleteVideos();
+    await Promise.all([
+      deleteRawVideo(inputFileName),
+      deleteProcessedVideo(outputFileName),
+    ]);
     console.log(err);
     return res
       .status(500)
@@ -58,7 +53,10 @@ app.post("/process-video", async (req, res) => {
   //Upload the processed video to Cloud Storage
   await uploadProcessedVideo(outputFileName);
 
-  deleteVideos();
+  await Promise.all([
+    deleteRawVideo(inputFileName),
+    deleteProcessedVideo(outputFileName),
+  ]);
 
   return res.status(200).send("Processing finished successfully.");
 });

@@ -1,12 +1,11 @@
 import { Storage } from "@google-cloud/storage";
 import fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
-import { rejects } from "assert";
 
 const storage = new Storage();
 
-const rawVideoBucketName = "yt-raw-videos";
-const processedVideoBucketName = "yt-processed-videos";
+const rawVideoBucketName = "sg-yt-raw-videos";
+const processedVideoBucketName = "sg-yt-processed-videos";
 
 const localRawVideoPath = "./raw-videos";
 const localProcessedVideoPath = "./processed-videos";
@@ -28,7 +27,7 @@ export function setUpDirectories() {
 export function convertVideo(rawVideoName: string, processedVideoName: string) {
   return new Promise<void>((resolve, reject) => {
     ffmpeg(`${localRawVideoPath}/${rawVideoName}`)
-      .outputOptions("-vf", "scale=-1:360") //360p
+      .outputOptions("-vf", "scale=-1:360") //360p video
       .on("end", () => {
         console.log("Video processing finished successfully.");
         resolve();
