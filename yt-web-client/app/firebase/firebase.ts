@@ -11,10 +11,10 @@ import { getFunctions } from "firebase/functions";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCB_DJAOfvpWjeQGNxZ053UNQfUDJaPq8Y",
+  apiKey: "",
   authDomain: "yt-clone-52971.firebaseapp.com",
   projectId: "yt-clone-52971",
-  appId: "1:116414733900:web:a70557109e919e25a75ee9",
+  appId: "",
 };
 
 // Initialize Firebase
