@@ -6,6 +6,7 @@ import SignIn from "./sign-in";
 import { onAuthStateChangedHelper } from "../firebase/firebase";
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
+import Upload from "./upload";
 
 export default function Navbar() {
   // Init user state
@@ -29,9 +30,7 @@ export default function Navbar() {
           alt="Youtube Logo"
         />
       </Link>
-      {
-        // Add an upload button when user is signed in
-      }
+      {user && <Upload />}
       <SignIn user={user} />
     </nav>
   );
