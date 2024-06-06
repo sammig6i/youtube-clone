@@ -4,7 +4,6 @@ module.exports = {
     es6: true,
     node: true,
   },
-
   extends: [
     "eslint:recommended",
     "plugin:import/errors",
@@ -15,17 +14,20 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: ["tsconfig.json", "tsconfig.dev.json"],
-    tsconfigRootDir: __dirname,
+    project: [
+      "./yt-api-service/functions/tsconfig.json",
+      "./yt-api-service/functions/tsconfig.dev.json",
+    ],
     sourceType: "module",
   },
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
+    "/generated/**/*", // Ignore generated files.
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {
+    "quotes": ["error", "double"],
     "import/no-unresolved": 0,
     "indent": ["error", 2],
-    "quotes": ["error", "double"],
   },
 };

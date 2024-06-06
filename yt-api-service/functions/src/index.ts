@@ -64,7 +64,8 @@ export const generateUploadURL = onCall(
 );
 
 export const getVideos = onCall({maxInstances: 1}, async () => {
-  const snapshot = await firestore.collection(videoCollectionId)
+  const snapshot = await firestore
+    .collection(videoCollectionId)
     .limit(10)
     .get();
   return snapshot.docs.map((doc) => doc.data());
